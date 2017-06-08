@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule) {
 		$schedule->command('postlis:daily')
-			->daily();
+			->dailyAt('18:30');
 	}
 
 	/**
@@ -33,6 +33,6 @@ class Kernel extends ConsoleKernel {
 	 * @return void
 	 */
 	protected function commands() {
-		require base_path('routes/console.php');
+		// require base_path('routes/console.php');
 	}
 }

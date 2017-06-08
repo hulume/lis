@@ -2,7 +2,6 @@
 namespace App\Services;
 use App\Mail\PostLisFeedback;
 use Cache;
-use Carbon\Carbon;
 use DB;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Mail;
@@ -28,7 +27,7 @@ class PostData {
 		return $this->postData($query);
 	}
 	public function daily() {
-		$day = Carbon::yesterday()->format('Y.m.d');
+		$day = date('Y.m.d');
 		$query = DB::table('as_report')
 			->select('rep_no', 'name', 'rep_date')
 			->where('rep_date', 'like', $day . '%')
@@ -45,7 +44,7 @@ class PostData {
 	private function postData($query) {
 		$data = $query->map(function ($item, $key) {
 			if (!empty($item)) {
-				if (!empty(preg_match("/\d{7,11}/", $item->name))) {
+				if (!empty(preg_match("/^[0-9]{7,11}$/", $item->name))) {
 					return [
 						'rep_no' => $item->rep_no,
 						'rep_date' => $item->rep_date,

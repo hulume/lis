@@ -16,7 +16,7 @@
                               </tr>
                               <tr>
                                  <td width="32px"></td>
-                                 <td style="font-family: Roboto-Regular,Helvetica,Arial,sans-serif; font-size: 24px; color: #FFFFFF; line-height: 1.25;">微脉事数据服务器同步到了新的数据</td>
+                                 <td style="font-family: Roboto-Regular,Helvetica,Arial,sans-serif; font-size: 24px; color: #FFFFFF; line-height: 1.25;">微脉事数据服务器日志</td>
                                  <td width="32px"></td>
                               </tr>
                               <tr>
@@ -35,7 +35,7 @@
                               </tr>
                               <tr>
                                  <td width="32px"></td>
-                                 <td style="font-family: Roboto-Regular,Helvetica,Arial,sans-serif; font-size: 13px; color: #202020; line-height: 1.5;">根据您的需求，微脉事数据已于{{$time}}进行了同步，下面是同步情况：</td>
+                                 <td style="font-family: Roboto-Regular,Helvetica,Arial,sans-serif; font-size: 13px; color: #202020; line-height: 1.5;">根据您的需求，微脉事数据服务器已于{{$time}}进行了同步请求，下面是同步日志：</td>
                                  <td width="10px"></td>
                               </tr>
                               <tr>
