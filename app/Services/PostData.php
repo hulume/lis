@@ -45,15 +45,16 @@ class PostData {
 		$data = $query->map(function ($item, $key) {
 			if (!empty($item)) {
 				if (!empty(preg_match("/^[0-9]{7,11}$/", $item->name))) {
+					$raw = DB::table('as_repentry')
+						->leftJoin('as_code_item', 'as_repentry.item_code', '=', 'as_code_item.item_code')
+						->where('rep_no', '=', $item->rep_no)
+						->select('as_repentry.result', 'as_code_item.item_name', 'as_repentry.normal')
+						->get();
 					return [
 						'rep_no' => $item->rep_no,
 						'rep_date' => $item->rep_date,
 						'name' => $item->name,
-						'result' => DB::table('as_repentry')
-							->leftJoin('as_code_item', 'as_repentry.item_code', '=', 'as_code_item.item_code')
-							->where('rep_no', '=', $item->rep_no)
-							->select('as_repentry.result', 'as_code_item.item_name', 'as_repentry.normal')
-							->get(),
+						'result' => ['date' => $item->rep_date, 'data' => $raw],
 					];
 				}
 			}
