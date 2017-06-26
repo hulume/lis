@@ -177,6 +177,9 @@ return [
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
 
+		// 公卫系统
+		App\Providers\PublicHealthServiceProvider::class,
+
 	],
 
 	/*
