@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Services\PublicHealthProxy;
+use App\Services\PublicHealth\AgedProxy;
 
 /**
  * 公共卫生系统抓取患者数据
@@ -9,7 +9,7 @@ use App\Services\PublicHealthProxy;
 class PublicHealthPatientController extends Controller {
 
 	protected $proxy;
-	public function __construct(PublicHealthProxy $proxy) {
+	public function __construct(AgedProxy $proxy) {
 		$this->proxy = $proxy;
 	}
 
@@ -17,6 +17,6 @@ class PublicHealthPatientController extends Controller {
 		return $this->proxy->show($id);
 	}
 	public function index() {
-		return $this->proxy->index();
+		return $this->proxy->period('2017-01-01', '');
 	}
 }

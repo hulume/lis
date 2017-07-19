@@ -6,7 +6,7 @@ use DB;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Mail;
 
-class PostData {
+class PostLis {
 	private $token;
 	private $http;
 

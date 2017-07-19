@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\PostData;
+use App\Services\PostLis;
 use Illuminate\Console\Command;
 
 class PostDailyLisData extends Command {
@@ -27,7 +27,7 @@ class PostDailyLisData extends Command {
 	 *
 	 * @return void
 	 */
-	public function __construct(PostData $post) {
+	public function __construct(PostLis $post) {
 		parent::__construct();
 		$this->post = $post;
 	}

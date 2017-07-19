@@ -2,33 +2,34 @@
 
 namespace App\Console\Commands;
 
+use App\Services\PublicHealth\AgedProxy;
 use Illuminate\Console\Command;
 
-class GrabAllDataForAged extends Command {
+class PostDailyPublicHealth extends Command {
 	/**
 	 * The name and signature of the console command.
 	 *
 	 * @var string
 	 */
-	protected $signature = 'lis:allAged';
+	protected $signature = 'posthealth:all';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Grab all Aged LIS data from sql-server database';
+	protected $description = 'Post daily public health data from PublicHealth System';
 
-	protected $grab;
+	protected $post;
 
 	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct(GrabData $grab) {
+	public function __construct(AgedProxy $post) {
 		parent::__construct();
-		$this->grab = $grab;
+		$this->post = $post;
 	}
 
 	/**
@@ -37,6 +38,6 @@ class GrabAllDataForAged extends Command {
 	 * @return mixed
 	 */
 	public function handle() {
-		$this->grab->all();
+		$this->post->all();
 	}
 }

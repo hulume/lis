@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel {
 	protected $commands = [
 		Commands\PostDailyLisData::class,
 		Commands\PostLisData::class,
+		Commands\PostDailyPublicHealth::class,
 	];
 
 	/**
