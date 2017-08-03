@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel {
 		Commands\PostDailyLisData::class,
 		Commands\PostLisData::class,
 		Commands\PostDailyPublicHealth::class,
+		Commands\PostPeriodPublicHealth::class,
 	];
 
 	/**
@@ -26,6 +27,8 @@ class Kernel extends ConsoleKernel {
 	protected function schedule(Schedule $schedule) {
 		$schedule->command('postlis:daily')
 			->dailyAt('18:30');
+		$schedule->command('posthealth:daily')
+			->dailyAt('23:00');
 	}
 
 	/**

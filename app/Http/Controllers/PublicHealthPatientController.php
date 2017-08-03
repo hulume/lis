@@ -13,8 +13,8 @@ class PublicHealthPatientController extends Controller {
 		$this->proxy = $proxy;
 	}
 
-	public function edit($id) {
-		return $this->proxy->show($id);
+	public function show() {
+		return $this->proxy->show();
 	}
 	public function index() {
 		return $this->proxy->period('2017-01-01', '');

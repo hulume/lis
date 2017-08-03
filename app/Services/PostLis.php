@@ -1,18 +1,14 @@
 <?php
 namespace App\Services;
-use App\Mail\PostLisFeedback;
-use Cache;
+use App\Services\GetPostToken;
 use DB;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Mail;
 
 class PostLis {
-	private $token;
 	private $http;
 
 	public function __construct(Client $http) {
 		$this->http = $http;
-		$this->token = $this->getToken();
 	}
 	/**
 	 * 上传所有Lis数据
@@ -60,24 +56,14 @@ class PostLis {
 		})->reject(function ($item) {
 			return empty($item);
 		})->values()->all();
-		$r = $this->http->post(env('API_URL'), [
+		$r = $this->http->post(env('LIS_UPLOAD_URL'), [
 			'headers' => [
 				'Accept' => 'application/json',
-				'Authorization' => 'Bearer ' . $this->token,
+				'Authorization' => 'Bearer ' . GetPostToken::get(),
 			],
 			'json' => $data,
 		]);
 		Mail::to(env('ADMIN_EMAIL'))->send(new PostLisFeedback(['time' => date('Y-m-d H:i:s'), 'content' => $r->getBody()]));
 	}
 
-	private function getToken() {
-		if (Cache::has('client_credentials_token')) {
-			return Cache::get('client_credentials_token');
-		}
-		$response = $this->http->get(env('GET_TOKEN_URL'));
-		// dd($response->getBody());
-		$token = json_decode($response->getBody(), true)['access_token'];
-		Cache::forever('client_credentials_token', $token);
-		return $token;
-	}
 }
