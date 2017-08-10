@@ -1,8 +1,10 @@
 <?php
 namespace App\Services;
+use App\Mail\PostLisFeedback;
 use App\Services\GetPostToken;
 use DB;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Mail;
 
 class PostLis {
 	private $http;
@@ -14,11 +16,14 @@ class PostLis {
 	 * 上传所有Lis数据
 	 * @return collection
 	 */
-	public function all() {
+	public function period($from, $to) {
+
 		// 取出姓名如1701011类型的记录, 用于初始化时调用
 		$query = DB::table('as_report')
 			->select('rep_no', 'name', 'rep_date')
 			->where('name', 'like', '[1-9]%')
+			->where('rep_date', '<=', $to)
+			->where('rep_date', '>=', $from)
 			->get();
 		return $this->postData($query);
 	}
